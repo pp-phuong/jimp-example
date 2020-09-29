@@ -29,7 +29,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['@/assets/css/style.css'],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -45,14 +45,12 @@ export default {
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module',
   ],
   /*
    ** Nuxt.js modules
    */
   modules: [
     // Doc: https://bootstrap-vue.js.org
-    'bootstrap-vue/nuxt',
   ],
   /*
    ** Build configuration
@@ -71,6 +69,9 @@ export default {
             fix: true,
           },
         })
+        config.node = {
+          fs: 'empty',
+        }
       }
     },
   },

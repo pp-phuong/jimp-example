@@ -11,13 +11,9 @@
     "lint": "npm run lint:js"
   },
   "dependencies": {
-    "bootstrap": "^4.5.0",
-    "bootstrap-vue": "^2.15.0",
+    "fs": "0.0.1-security",
     "jimp": "^0.16.1",
-    "multer": "^1.4.2",
-    "node-sass": "^4.14.1",
-    "nuxt": "^2.14.0",
-    "sass-loader": "^10.0.2"
+    "nuxt": "^2.14.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.1.0",
