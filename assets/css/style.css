@@ -1,10 +1,11 @@
 body {
   padding: 20px;
 }
-/* .row {
-  display: flex;
-  flex-direction: row;
-} */
+img {
+  padding: 20px;
+  max-height: 600px;
+  width: auto;
+}
 input {
   outline: none;
   border: 1px solid #bbb;
@@ -33,7 +34,7 @@ input {
   border-radius: 20px;
   font-size: 13px;
 }
-.box-image {
+.center {
   display: flex;
   justify-content: center;
 }

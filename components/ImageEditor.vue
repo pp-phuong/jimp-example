@@ -55,16 +55,20 @@
         <button class="btn">{{ tool }}</button>
       </slot>
     </span>
-
+    <button class="btn" @click="hide = !hide">OriginImage</button>
     <div>
       <label v-if="!image" class="upload_btn">
         Upload Image
         <input type="file" hidden="hidden" @change="onFileChange" />
       </label>
 
-      <div v-if="image" class="box-image">
+      <div v-if="image" class="center">
         <img :src="image" />
+        <img v-if="!hide" :src="originImage" alt="" />
       </div>
+      <a v-if="image" :href="image" class="btn center" :download="image">
+        Download
+      </a>
     </div>
   </div>
 </template>
@@ -92,6 +96,8 @@ export default {
       opacityVal: 0,
       blurVal: 0,
       editingImage: '',
+      originImage: null,
+      hide: true,
       text: '',
     }
   },
@@ -104,6 +110,7 @@ export default {
         return
       }
       this.image = await this.readFileToBase64(file)
+      this.originImage = this.image
     },
     checkFileType(file) {
       let check = 0
@@ -125,6 +132,7 @@ export default {
       this.undoImage.length = 0
       this.redoImage.length = 0
       this.editingImage = ''
+      this.originImage = ''
     },
     callMethod(feature) {
       if (!this.checkImage()) {
@@ -146,7 +154,7 @@ export default {
       }
       this['on' + feature]()
     },
-    saveImage() {
+    saveImage(feature) {
       this.editingImage = this.image
       this.undoImage.push(this.image)
     },
@@ -188,23 +196,26 @@ export default {
       this.image = await this.cropImage(this.image, 'bottom')
     },
     async onCropSquareCenter() {
-      this.image = await this.cropImage(this.image, 'center')
+      this.image = await this.cropImage(this.image, 'top')
     },
-
+    async onText(text) {
+      this.image = await this.textImage(this.image, text)
+    },
     onUndoImage() {
       if (this.undoImage.length <= 0) {
         alert('Cant undo anymore!')
-        return
+      } else {
+        this.redoImage.push(this.image)
+        this.image = this.undoImage.pop()
       }
-      this.redoImage.push(this.image)
-      this.image = this.undoImage.pop()
     },
     onRedoImage() {
-      if (this.undoImage.length <= 0) {
+      if (this.redoImage.length <= 0) {
         alert('Cant redo anymore!')
+      } else {
+        this.undoImage.push(this.image)
+        this.image = this.redoImage.pop()
       }
-      this.undoImage.push(this.image)
-      this.image = this.redoImage.pop()
     },
   },
 }

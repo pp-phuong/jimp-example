@@ -58,11 +58,27 @@ export default {
         else if (w < h) image.crop(0, h - w, w, w)
       }
       if (option === 'center') {
-        if (w > h) image.crop((w - h) / 2, 0, h, h)
-        else if (w < h) image.crop(0, (h - w) / 2, w, w)
+        if (w > h) image.crop(0, (w - h) / 2, h, h)
+        else if (w < h) image.crop((h - w) / 2, 0, w, w)
       }
       console.log(w > h ? h : w)
       return await image.getBase64Async(image.getMIME())
     },
+    async textImage(base64Str, text) {
+      const image = await Jimp.read(base64Str)
+      await Jimp.loadFont('../assets/font/font.fnt')
+        .then((font) => {
+          image.print(font, 10, 10, text)
+          return image
+        })
+        .then((image) => {
+          return image.getBase64Async(image.getMIME())
+        })
+    },
+    // image.color([
+    //   { apply: 'hue', params: [-90] },
+    //   { apply: 'lighten', params: [50] },
+    //   { apply: 'xor', params: ['#06D'] }
+    // ]);
   },
 }
