@@ -1,1 +1,1 @@
-export { default as ImageEditor } from '../components/ImageEditor.vue'
+export { default as ImageEditor } from './ImageEditor.vue'

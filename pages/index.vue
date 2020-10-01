@@ -1,14 +1,9 @@
 <template>
-  <client-only>
-    <div class="text-center">
-      <ImageEditor :ftypes="ftypes" :options="options">
-        <template v-slot:crop>
-          <!-- Customize your button in here -->
-          <!-- Value of v-slot is the feature you want to customize -->
-        </template>
-      </ImageEditor>
-    </div>
-  </client-only>
+  <div>
+    <ImageEditor :allow-format="allowFormat" :options="options">
+      <slot> </slot>
+    </ImageEditor>
+  </div>
 </template>
 
 <script>
@@ -19,26 +14,23 @@ export default {
   },
   data() {
     return {
-      // upload photo format
-      ftypes: ['jpg', 'png', 'jpeg'],
-
+      allowFormat: ['jpeg', 'png', 'jpg'],
       options: {
-        // the feature name to call the method
         features: [
           'RotateLeft',
           'RotateRight',
-          'CropSquareTop',
-          'CropSquareBottom',
-          'CropSquareCenter',
-          'Text',
           'FlipHorizontal',
           'FlipVertical',
           'Bright',
           'Contrast',
-          'Greyscale',
+          'Opacity',
+          'Blur',
+          'CropSquareTop',
+          'CropSquareBottom',
+          'CropSquareCenter',
+          'Text',
         ],
-        // tool name additional
-        tools: ['RemoveImage', 'UndoImage', 'RedoImage'],
+        tools: ['UndoImage', 'RedoImage', 'RemoveImage'],
       },
     }
   },

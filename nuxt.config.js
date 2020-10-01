@@ -29,7 +29,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['@/assets/css/style.css'],
+  css: ['~/assets/css/style.css'],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -45,7 +45,11 @@ export default {
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
+    '@nuxtjs/eslint-module',
   ],
+  eslint: {
+    fix: true,
+  },
   /*
    ** Nuxt.js modules
    */
@@ -57,6 +61,9 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
+    /*
+     ** You can extend webpack config here
+     */
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
@@ -68,10 +75,10 @@ export default {
           options: {
             fix: true,
           },
-        })
-        config.node = {
-          fs: 'empty',
-        }
+        }),
+          (config.node = {
+            fs: 'empty',
+          })
       }
     },
   },
