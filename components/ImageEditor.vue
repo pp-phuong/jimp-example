@@ -62,7 +62,7 @@
         <input type="file" hidden="hidden" @change="onFileChange" />
       </label>
 
-      <div v-if="image" class="center">
+      <div v-if="image" class="center frame">
         <img :src="image" />
         <img v-if="!hide" :src="originImage" alt="" />
       </div>

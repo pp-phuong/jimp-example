@@ -38,3 +38,6 @@ input {
   display: flex;
   justify-content: center;
 }
+.frame {
+  border: 1px solid black;
+}
